@@ -18,6 +18,8 @@ $(function() {
 	var testColors = ["blue", "green", "red"];
 	var testText = ["creme de menthe","creme de cacao","fresh cream"];
 	drawParts(testParts,testColors,testText);
+    consoleDrink();
+    genDrinkList();
 });
 
 function colorizeIngredients() {
