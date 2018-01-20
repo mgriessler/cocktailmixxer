@@ -46,14 +46,33 @@
 
 .button {
     background-color: #555555;
-    border: none;
+    border: 2px solid #555555;
     color: white;
     padding: 15px 32px;
+    margin-left: 5px;
+    margin-right: 5px;
     text-align: center;
     text-decoration: none;
     display: block;
     font-size: 16px;
-    width: 100%;
+    width: 95%;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+}
+
+.button:hover {
+    background-color: white;
+    color: black;
+}
+
+.label {
+    font-weight: bold;
+}
+
+#drink-list-title {
+    text-align: center;
     margin-top: 2px;
     margin-bottom: 2px;
 }
