@@ -33,7 +33,11 @@ function colorizeIngredients() {
 	ingredColors["mint"] = [93,198,4];
 	ingredColors["sugar"] = [197,201,205];
 	ingredColors["soda water"] = [196,199,191];
-	ingredColors["triple sec"] = [
+	ingredColors["triple sec"] = [203,204,208];
+	ingredColors["gin"] = [191,193,194];
+	ingredColors["lemon juice"] = [208,183,0];
+	ingredColors["simple syrup"] = [183,183,179];
+	ingredColors["coca-cola"] = [132,12,0];
 }
 
 //draws a Collins Glass. 3 lines
@@ -75,5 +79,35 @@ function drawParts(partsArr, colorArr, textArr) {
 		ctx.fillRect(LEFT_GLASS_X+0.5*GLASS_WIDTH, adjustedBottom - (runningPartTotal * eachPartSize), partWidth, thisPartSize); 
 	}
 	ctx.fillStyle = 'black';
+	//addIce();
+	//addStraw(adjustedBottom - (runningPartTotal*eachPartSize));
+}
+
+function addIce() {
+	ctx.fillStyle = 'rgb(208,213,223)';
+	ctx.globalAlpha = 0.3;
+	var iceSize = 100;
+	//var img = new Image();
+	//img.onload = function() {
+	//	ctx.drawImage(img, LEFT_GLASS_X, BOTTOM_GLASS_Y - iceSize, iceSize, iceSize);
+	//}
+	//img.src = "http://doughertysice.com/wp-content/uploads/2015/01/Ice-Pile-full-screen.jpg";
+	moveAndRotate(LEFT_GLASS_X + 0.5*iceSize, BOTTOM_GLASS_Y - iceSize + iceSize*0.5, (Math.PI / 180)*25);
+	ctx.fillRect(LEFT_GLASS_X + 10, BOTTOM_GLASS_Y - iceSize - 25, iceSize, iceSize);
+	moveAndRotate(LEFT_GLASS_X + 0.5*iceSize, BOTTOM_GLASS_Y - iceSize + iceSize*0.5, -(Math.PI / 180)*25);
+	ctx.fillRect(RIGHT_GLASS_X - 103, BOTTOM_GLASS_Y - iceSize, iceSize, iceSize);
+	ctx.globalAlpha = 1.0;
+	ctx.fillStyle = 'black';
+}
+
+function moveAndRotate(moveX, moveY, rotateAngle) {
+	ctx.translate(moveX, moveY);
+	ctx.rotate(rotateAngle);
+	ctx.translate(-moveX, -moveY);
+}
+
+function addStraw(topPart) {
+	ctx.fillRect(RIGHT_GLASS_X - 30, TOP_GLASS_Y - 25, 20, topPart-5);
+	ctx.fillRect(RIGHT_GLASS_X - 30, TOP_GLASS_Y - 25, 60, 20);
 }
 
