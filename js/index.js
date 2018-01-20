@@ -7,17 +7,15 @@ var GLASS_WIDTH = 3;
 var c;
 var ctx;
 var ingredColors = {};
+var TOP_PART;
+var CANVAS_WIDTH = 500;
+var CANVAS_HEIGHT = 500;
 
 //this function is called when the DOM is ready apparently is equivalent to $(document).reday(function(){});
 $(function() {
 	c = $("#drink")[0];
 	ctx = c.getContext("2d");
 	colorizeIngredients();
-	drawCollinsGlass();
-	var testParts = [7, 4, 3];
-	var testColors = ["blue", "green", "red"];
-	var testText = ["creme de menthe","creme de cacao","fresh cream"];
-	drawParts(testParts,testColors,testText);
     consoleDrink();
     genDrinkList();
 });
@@ -80,9 +78,8 @@ function drawParts(partsArr, colorArr, textArr) {
 		//X: left side plus 1/2 of the width for no overlap, Y: Bottom, then up by number of part, then up by glass width for no overlap
 		ctx.fillRect(LEFT_GLASS_X+0.5*GLASS_WIDTH, adjustedBottom - (runningPartTotal * eachPartSize), partWidth, thisPartSize); 
 	}
+	TOP_PART = adjustedBottom - (runningPartTotal*eachPartSize);
 	ctx.fillStyle = 'black';
-	//addIce();
-	//addStraw(adjustedBottom - (runningPartTotal*eachPartSize));
 }
 
 function addIce() {
@@ -108,8 +105,13 @@ function moveAndRotate(moveX, moveY, rotateAngle) {
 	ctx.translate(-moveX, -moveY);
 }
 
-function addStraw(topPart) {
-	ctx.fillRect(RIGHT_GLASS_X - 30, TOP_GLASS_Y - 25, 20, topPart-5);
+function addStraw() {
+	ctx.fillRect(RIGHT_GLASS_X - 30, TOP_GLASS_Y - 25, 20, TOP_PART-5);
 	ctx.fillRect(RIGHT_GLASS_X - 30, TOP_GLASS_Y - 25, 60, 20);
 }
+
+function reset() {
+	context.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+}
+
 
