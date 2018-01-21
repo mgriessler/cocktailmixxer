@@ -8,8 +8,8 @@ var c;
 var ctx;
 var ingredColors = {};
 var TOP_PART;
-var CANVAS_WIDTH = 500;
-var CANVAS_HEIGHT = 500;
+var CANVAS_WIDTH = 550;
+var CANVAS_HEIGHT = 550;
 var GLASS = "collins";
 
 //this function is called when the DOM is ready apparently is equivalent to $(document).reday(function(){});
@@ -37,15 +37,20 @@ function colorizeIngredients() {
 	ingredColors["soda water"] = '#E3E4E6';
 	ingredColors["triple sec"] = '#320906';
 	ingredColors["gin"] = '#E0E0E0';
-	ingredColors["lemon juice"] = '#E2A624';
-	ingredColors["simple syrup"] = '#C7752B';
+	ingredColors["lemon juice"] = '#FEF823';
+	ingredColors["simple syrup"] = '#CCCCCC';
 	ingredColors["coca-cola"] = '#66130B';
 	ingredColors["sweet red vermouth"] = '#BE697F';
-	ingredColors["compari"] = '#840000';
+	ingredColors["campari"] = '#840000';
 	ingredColors["grenadine"] = '#E80000';
 	ingredColors["orange juice"] = '#FFB500';
 	ingredColors["cherry"] = '#A60707';
 	ingredColors["ice"] = '#71C4D9';
+    ingredColors["peach schnapps"] = '#E5E5E3';
+    ingredColors["cranberry juice"] = '#D8161F';
+    ingredColors["bourbon"] = '#B15900';
+    ingredColors["cognac"] = '#F8931B';
+    ingredColors["rum"] = '#1B0000';
 }
 
 function drawGlass(nameOfGlass) {
@@ -63,7 +68,7 @@ function drawGlass(nameOfGlass) {
 			drawCocktailGlass();
 			break;
 		case "highball":
-			GLASS = "old fashioned";
+			GLASS = "highball";
 			drawCollinsGlass();
 			break;
 		case "copper mug":
@@ -73,6 +78,7 @@ function drawGlass(nameOfGlass) {
 		case "margarita":
 			GLASS = "margarita";
 			drawCocktailGlass();
+            break;
 		default:
 			GLASS = "collins";
 			drawCollinsGlass();
@@ -261,7 +267,7 @@ function addCherry() {
 	ctx.fillStyle = ingredColors['cherry'];
 	ctx.beginPath();
 	ctx.moveTo(2*(RIGHT_GLASS_X - LEFT_GLASS_X) / 3 + 20, TOP_GLASS_Y + TOP_GAP);
-	ctx.arc(2*(RIGHT_GLASS_X - LEFT_GLASS_X) / 3, TOP_GLASS_Y + TOP_GAP, 20, 0, 2*Math.PI, 0);
+	ctx.arc(2*(RIGHT_GLASS_X - LEFT_GLASS_X) / 3, TOP_GLASS_Y + TOP_GAP, 20, 0, Math.PI, 1);
 	ctx.fill();
 	ctx.fillStyle = 'black';
 }
