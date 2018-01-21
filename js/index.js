@@ -10,7 +10,6 @@ var ingredColors = {};
 var TOP_PART;
 var CANVAS_WIDTH = 500;
 var CANVAS_HEIGHT = 500;
-//UNDECLARE BEFORE YOU MERGE!!!!!!!!!!!!!!!!!
 var GLASS = "collins";
 
 //this function is called when the DOM is ready apparently is equivalent to $(document).reday(function(){});
@@ -35,7 +34,7 @@ function colorizeIngredients() {
 	ingredColors["white rum"] = '#D7D6DE';
 	ingredColors["mint"] = '#7AB120';
 	ingredColors["sugar"] = '#E5E5E3';
-	ingredColors["soda water"] = '#FEFEFE';
+	ingredColors["soda water"] = '#E3E4E6';
 	ingredColors["triple sec"] = '#320906';
 	ingredColors["gin"] = '#E0E0E0';
 	ingredColors["lemon juice"] = '#E2A624';
@@ -45,44 +44,43 @@ function colorizeIngredients() {
 	ingredColors["compari"] = '#840000';
 	ingredColors["grenadine"] = '#E80000';
 	ingredColors["orange juice"] = '#FFB500';
+	ingredColors["cherry"] = '#A60707';
+	ingredColors["ice"] = '#71C4D9';
 }
 
 function drawGlass(nameOfGlass) {
 	switch (nameOfGlass) {
 		case "collins":
+			GLASS = "collins";
 			drawCollinsGlass();
 			break;
 		case "old fashioned":
+			GLASS = "old fashioned";
 			drawOldFashionedGlass();
 			break;
 		case "cocktail":
+			GLASS = "cocktail";
 			drawCocktailGlass();
 			break;
 		case "highball":
+			GLASS = "old fashioned";
 			drawCollinsGlass();
 			break;
 		case "copper mug":
+			GLASS = "copper mug";
 			drawOldFashionedGlass();
 			break;
 		case "margarita":
+			GLASS = "margarita";
 			drawCocktailGlass();
 		default:
+			GLASS = "collins";
 			drawCollinsGlass();
 	}
 }
 
 //draws a Collins Glass. 3 lines
 function drawCollinsGlass() {
-	switch (GLASS) {
-		case "old-fashioned":
-			drawOldFashionedGlass();
-			return;
-		case "cocktail":
-			drawCocktailGlass();
-			return;
-		default:
-			break;
-	}
 	ctx.lineWidth = GLASS_WIDTH;
 	TOP_GLASS_Y = 30;
 	BOTTOM_GLASS_Y = 490;
@@ -174,13 +172,13 @@ function drawParts(partsArr, colorArr, textArr) {
 }
 
 function getX(newH, rightIsT_leftIsF) {
-	if (GLASS == "collins glass" || GLASS == "old-fashioned glass") {
+	if (GLASS == "collins" || GLASS == "old-fashioned") {
 		if (rightIsT_leftIsF) {
 			return(RIGHT_GLASS_X);
 		} else {
 			return(LEFT_GLASS_X+0.5*GLASS_WIDTH);
 		}
-	} else if (GLASS == "cocktail glass") {
+	} else if (GLASS == "cocktail") {
 		if (rightIsT_leftIsF) {
 			return((newH-(125103/260))*(-130/183));
 		} else {
@@ -190,7 +188,7 @@ function getX(newH, rightIsT_leftIsF) {
 }
 
 function getY(partInd, partTot, currentPartTotal, eachPartWeight, adjustedFromBottom) {
-	if (GLASS == "collins glass" || GLASS == "old-fashioned glass") {
+	if (GLASS == "collins" || GLASS == "old-fashioned") {
 		return (adjustedFromBottom - (currentPartTotal*eachPartWeight));
 	} else if (GLASS == "cocktail glass") {
 		return (Math.sqrt(partInd/(partTot/2)) * (BOTTOM_GLASS_Y - TOP_GLASS_Y - TOP_GAP))-BOTTOM_GLASS_Y;
@@ -198,7 +196,7 @@ function getY(partInd, partTot, currentPartTotal, eachPartWeight, adjustedFromBo
 }
 
 function addIce() {
-	ctx.fillStyle = 'rgb(208,213,223)';
+	ctx.fillStyle = ingredColors["ice"];
 	ctx.globalAlpha = 0.5;
 	var iceSize = 100;
 	//var img = new Image();
@@ -210,6 +208,13 @@ function addIce() {
 	ctx.fillRect(LEFT_GLASS_X + 10, BOTTOM_GLASS_Y - iceSize - 25, iceSize, iceSize);
 	moveAndRotate(LEFT_GLASS_X + 0.5*iceSize, BOTTOM_GLASS_Y - iceSize + iceSize*0.5, -(Math.PI / 180)*25);
 	ctx.fillRect(RIGHT_GLASS_X - 103, BOTTOM_GLASS_Y - iceSize, iceSize, iceSize);
+	if (GLASS == "collins" || GLASS == "highball") {
+		moveAndRotate(LEFT_GLASS_X + 0.5*iceSize, BOTTOM_GLASS_Y - iceSize + iceSize*0.5, -(Math.PI / 180)*25);
+		ctx.fillRect(RIGHT_GLASS_X - 80, BOTTOM_GLASS_Y - 1.45*iceSize - 10, iceSize, iceSize);
+		moveAndRotate(LEFT_GLASS_X + 0.5*iceSize, BOTTOM_GLASS_Y - iceSize + iceSize*0.5, -(Math.PI / 180)*5);
+		ctx.fillRect(LEFT_GLASS_X + 110, BOTTOM_GLASS_Y - 2.5*iceSize + 5, iceSize, iceSize);
+		moveAndRotate(LEFT_GLASS_X + 0.5*iceSize, BOTTOM_GLASS_Y - iceSize + iceSize*0.5, (Math.PI / 180)*30);
+	}
 	ctx.globalAlpha = 1.0;
 	ctx.fillStyle = 'black';
 }
@@ -231,11 +236,11 @@ function reset() {
 
 function addLemon(lemIs0_limeIs1_orangeIs2) {
 	if (lemIs0_limeIs1_orangeIs2 == 0) {
-		ctx.fillStyle = 'rgb(' + ingredColors['lemon juice'][0] + ', ' + ingredColors['lemon juice'][1] + ', ' + ingredColors['lemon juice'][2] + ')';
-	} else if (lemIs0_limIs1_orangeIs2 == 1) {
-		ctx.fillStyle = 'rgb(' + ingredColors['lime juice'][0] + ', ' + ingredColors['lime juice'][1] + ', ' + ingredColors['lime juice'][2] + ')';
+		ctx.fillStyle = ingredColors['lemon juice'];
+	} else if (lemIs0_limeIs1_orangeIs2 == 1) {
+		ctx.fillStyle = ingredColors['lime juice'];
 	} else {
-		ctx.fillStyle = 'rgb(' + ingredColors['orange juice'][0] + ', ' + ingredColors['orange juice'][1] + ', ' + ingredColors['orange juice'][2] + ')';
+		ctx.fillStyle = ingredColors['orange juice'];
 	}
 	ctx.beginPath();
 	ctx.moveTo(LEFT_GLASS_X, TOP_GLASS_Y + 25);
@@ -252,3 +257,11 @@ function addLemon(lemIs0_limeIs1_orangeIs2) {
 	ctx.lineWidth = 1;
 }
 
+function addCherry() {
+	ctx.fillStyle = ingredColors['cherry'];
+	ctx.beginPath();
+	ctx.moveTo(2*(RIGHT_GLASS_X - LEFT_GLASS_X) / 3 + 20, TOP_GLASS_Y + TOP_GAP);
+	ctx.arc(2*(RIGHT_GLASS_X - LEFT_GLASS_X) / 3, TOP_GLASS_Y + TOP_GAP, 20, 0, 2*Math.PI, 0);
+	ctx.fill();
+	ctx.fillStyle = 'black';
+}
