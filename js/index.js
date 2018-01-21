@@ -74,7 +74,7 @@ function drawParts(partsArr, colorArr, textArr) {
 		//print name of part at shifted x and halfway up the new part
 		ctx.fillText(textArr[i], textLocation_X, adjustedBottom - runningPartTotal*eachPartSize);
 		runningPartTotal = runningPartTotal + partsArr[i]/2;	//finish updating runningPartTotal for part alignment
-		ctx.fillStyle = 'rgb(' + ingredColors[textArr[i]][0] + ', ' + ingredColors[textArr[i]][1] + ', ' + ingredColors[textArr[i]][2] + ')';		//get color of this part
+		ctx.fillStyle = 'rgb(' + ingredColors[colorArr[i]][0] + ', ' + ingredColors[colorArr[i]][1] + ', ' + ingredColors[colorArr[i]][2] + ')';		//get color of this part
 		//X: left side plus 1/2 of the width for no overlap, Y: Bottom, then up by number of part, then up by glass width for no overlap
 		ctx.fillRect(LEFT_GLASS_X+0.5*GLASS_WIDTH, adjustedBottom - (runningPartTotal * eachPartSize), partWidth, thisPartSize); 
 	}
@@ -111,7 +111,7 @@ function addStraw() {
 }
 
 function reset() {
-	context.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+	ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 }
 
 
