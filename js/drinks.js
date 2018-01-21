@@ -78,7 +78,7 @@ var drinks = {"drinks": [
             "https://en.wikipedia.org/wiki/Long_Island_Iced_Tea",
             "http://www.iba-world.com/english/cocktails/long-island-iced-tea"
         ],
-        "glass": "highball glass",
+        "glass": "collins glass",
         "garnishes": [
             "lemon spiral",
             "straw"

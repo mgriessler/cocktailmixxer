@@ -1,42 +1,43 @@
 .wrapper {
     display: grid;
-    grid-template-columns: 20% 60% 20%;
-    grid-gap: 10px;
+    grid-template-columns: auto 10% 500px 20% auto; 
+    grid-gap: 1px;
     grid-auto-rows: minmax(50px, auto);
 }
 .nav-bar {
-    grid-column-start: 1;
-    grid-column-end: 4;
+    grid-column-start: 2;
+    grid-column-end: 5;
     grid-row-start: 1;
     grid-row-end: 1;
     border: 1px solid black;
 }
 .left-side-bar {
-    grid-column-start: 1;
-    grid-column-end: 1;
+    grid-column-start: 2;
+    grid-column-end: 2;
     grid-row-start: 2;
     grid-row-end: 2;
     border: 1px solid purple;
 }
 .drink-container {
-    grid-column-start: 2;
-    grid-column-end: 2;
+    grid-column-start: 3;
+    grid-column-end: 3;
     grid-row-start: 2;
     grid-row-end: 2;
     border: 1px solid green;
 }
 .right-side-bar {
-    grid-column-start: 3;
-    grid-column-end: 3;
+    grid-column-start: 4;
+    grid-column-end: 4;
     grid-row-start: 2;
     grid-row-end: 2;
     border: 1px solid yellow;
 }
 .bottom-bar {
-    grid-column-start: 1;
-    grid-column-end: 3;
+    grid-column-start: 2;
+    grid-column-end: 5;
     grid-row-start: 3;
-    grid-row-end: 4;
+    grid-row-end: 3;
+    background-color: #555555;
     border: 1px solid blue;
 }
 
@@ -76,3 +77,28 @@
     margin-top: 2px;
     margin-bottom: 2px;
 }
+
+ul#nav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #555555;
+}
+
+ul#nav li {
+    float: left;
+}
+
+ul#nav li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+ul#nav li a:hover {
+    background-color: #111;
+}
+

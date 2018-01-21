@@ -20,6 +20,9 @@ function populateDrink(drink) {
     populatePrepInstructions(drink.prep);
     populateLinks(drink.links);
     drawCollinsGlass();
+    populateGarnishes(drink.garnishes);
+    if(drink.served == "on the rocks")
+        addIce();
 }
 
 function populateIngredients(ingredients) {
@@ -33,9 +36,6 @@ function populateIngredients(ingredients) {
             ingredientText.push(ingredient.name + " - " + ingredient.part + " part(s)");
         }
     }); 
-    console.log(ingredientNames);
-    console.log(ingredientParts);
-    console.log(ingredientText);
     drawParts(ingredientParts, ingredientNames, ingredientText);
 }
 function populatePrepInstructions(prep) {
@@ -45,4 +45,15 @@ function populatePrepInstructions(prep) {
 function populateLinks(links) {
     var linkhtml = "<ul><li><a href='" + links[0] + "'>Wikipedia</a></li><li><a href='" + links[1] + "'>International Bartenders Association</a></li></ul>";
     $("#links").html(linkhtml);
+}
+
+function populateGarnishes(garnishes) {
+    $.each(garnishes, function(key, garnish) {
+        if(garnish == "slice of lime")
+            addLemon(0);
+        else if(garnish == "lemon slice")
+            addLemon(1);
+        else if(garnish == "straw")
+            addStraw();
+    });
 }
