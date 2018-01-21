@@ -10,11 +10,13 @@ function genDrinkList() {
                 populateDrink(drink); 
             });
         buttons.push(b);
-        $(".left-side-bar").append(b);
+        $("#drink-list").append(b);
     });
 }
 
 function populateDrink(drink) {
+    $("#prep-instructions-label").css("display","block");
+    $("#links-label").css("display","block");
     reset();
     populateIngredients(drink.ingredients);
     populatePrepInstructions(drink.prep);

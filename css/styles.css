@@ -102,3 +102,8 @@ ul#nav li a:hover {
     background-color: #111;
 }
 
+#drink-list {
+    height: 458px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
