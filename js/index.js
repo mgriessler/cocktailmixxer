@@ -127,6 +127,10 @@ function drawCocktailGlass() {
 	ctx.lineTo((RIGHT_GLASS_X - LEFT_GLASS_X)/2 + LEFT_GLASS_X, BOTTOM_GLASS_Y);
 	ctx.lineTo((RIGHT_GLASS_X-LEFT_GLASS_X)/2 + LEFT_GLASS_X, BOTTOM_GLASS_Y);
 	ctx.lineTo(RIGHT_GLASS_X, TOP_GLASS_Y);
+	ctx.moveTo((RIGHT_GLASS_X-LEFT_GLASS_X)/2 + LEFT_GLASS_X, BOTTOM_GLASS_Y);
+	ctx.lineTo((RIGHT_GLASS_X-LEFT_GLASS_X)/2 + LEFT_GLASS_X, BOTTOM_GLASS_Y + 250);
+	ctx.moveTo((RIGHT_GLASS_X-LEFT_GLASS_X)/3 + LEFT_GLASS_X, BOTTOM_GLASS_Y + 250);
+	ctx.lineTo(2*(RIGHT_GLASS_X-LEFT_GLASS_X)/3 + LEFT_GLASS_X, BOTTOM_GLASS_Y + 250);
 	ctx.stroke();
 	ctx.lineWidth = 1;
 }
@@ -145,8 +149,8 @@ function drawParts(partsArr, colorArr, textArr) {
 	var runningPartTotal = 0;
 	var adjustedBottom = BOTTOM_GLASS_Y - 0.5*GLASS_WIDTH;
 	var textLocation_X = RIGHT_GLASS_X + 20;
-	//var x;
-	//var y;
+	var x;
+	var y;
 	var partWidth = RIGHT_GLASS_X - LEFT_GLASS_X - GLASS_WIDTH;		//width of each part is distance between the glass sides minus the width
 	for (var i = 0; i < partsArr.length; i++) {		//for each of the part
 		thisPartSize = partsArr[i] * eachPartSize;		//this part size is size of the part * the size
@@ -158,7 +162,24 @@ function drawParts(partsArr, colorArr, textArr) {
 		//ctx.fillStyle = 'rgb(' + ingredColors[colorArr[i]][0] + ', ' + ingredColors[colorArr[i]][1] + ', ' + ingredColors[colorArr[i]][2] + ')';		//get color of this part
 		ctx.fillStyle = ingredColors[colorArr[i]];
 		//X: left side plus 1/2 of the width for no overlap, Y: Bottom, then up by number of part, then up by glass width for no overlap
-		ctx.fillRect(LEFT_GLASS_X+0.5*GLASS_WIDTH, adjustedBottom - (runningPartTotal * eachPartSize), partWidth, thisPartSize);
+		if (GLASS == "collins" || GLASS == "old fashioned" || GLASS == "highball" || GLASS == "copper mug") {
+			ctx.fillRect(LEFT_GLASS_X+0.5*GLASS_WIDTH, adjustedBottom - (runningPartTotal * eachPartSize), partWidth, thisPartSize);
+		} else {
+			y = adjustedBottom - (runningPartTotal * eachPartSize);
+			x = 1.95*GLASS_WIDTH + (y+(13434/260))*(130/183);
+			ctx.beginPath();
+			ctx.moveTo(x,y);
+			ctx.lineTo(-(1.5)*GLASS_WIDTH+(y - (125103/260))*(-130/183), y);
+			if (i == 0) {
+				ctx.lineTo((RIGHT_GLASS_X-LEFT_GLASS_X)/2 + LEFT_GLASS_X, y + thisPartSize);
+				ctx.fill();
+			} else {
+				var oldY = adjustedBottom-(runningPartTotal*eachPartSize)+thisPartSize;
+				ctx.lineTo(-(1.5)*GLASS_WIDTH+(oldY-(125103/260))*(-130/183), oldY);
+				ctx.lineTo(1.5*GLASS_WIDTH+(oldY+(13434/260))*(130/183),oldY);
+				ctx.fill();
+			}
+		}
 		//ctx.beginPath();
 		//y = getY(thisPartSize, numParts, runningPartTotal, eachPartSize, adjustedBottom);
 		//top left
@@ -177,49 +198,33 @@ function drawParts(partsArr, colorArr, textArr) {
 	ctx.fillStyle = 'black';
 }
 
-function getX(newH, rightIsT_leftIsF) {
-	if (GLASS == "collins" || GLASS == "old fashioned") {
-		if (rightIsT_leftIsF) {
-			return(RIGHT_GLASS_X);
-		} else {
-			return(LEFT_GLASS_X+0.5*GLASS_WIDTH);
-		}
-	} else if (GLASS == "cocktail") {
-		if (rightIsT_leftIsF) {
-			return((newH-(125103/260))*(-130/183));
-		} else {
-			return((newH+(14343/260))*(130/183));
-		}
-	}
-}
-
-function getY(partInd, partTot, currentPartTotal, eachPartWeight, adjustedFromBottom) {
-	if (GLASS == "collins" || GLASS == "old fashioned") {
-		return (adjustedFromBottom - (currentPartTotal*eachPartWeight));
-	} else if (GLASS == "cocktail glass") {
-		return (Math.sqrt(partInd/(partTot/2)) * (BOTTOM_GLASS_Y - TOP_GLASS_Y - TOP_GAP))-BOTTOM_GLASS_Y;
-	}
-}
-
 function addIce() {
 	ctx.fillStyle = ingredColors["ice"];
 	ctx.globalAlpha = 0.5;
 	var iceSize = 100;
+	var iceSizeSmall = 50;
 	//var img = new Image();
 	//img.onload = function() {
 	//	ctx.drawImage(img, LEFT_GLASS_X, BOTTOM_GLASS_Y - iceSize, iceSize, iceSize);
 	//}
 	//img.src = "http://doughertysice.com/wp-content/uploads/2015/01/Ice-Pile-full-screen.jpg";
-	moveAndRotate(LEFT_GLASS_X + 0.5*iceSize, BOTTOM_GLASS_Y - iceSize + iceSize*0.5, (Math.PI / 180)*25);
-	ctx.fillRect(LEFT_GLASS_X + 10, BOTTOM_GLASS_Y - iceSize - 25, iceSize, iceSize);
-	moveAndRotate(LEFT_GLASS_X + 0.5*iceSize, BOTTOM_GLASS_Y - iceSize + iceSize*0.5, -(Math.PI / 180)*25);
-	ctx.fillRect(RIGHT_GLASS_X - 103, BOTTOM_GLASS_Y - iceSize, iceSize, iceSize);
+	if(GLASS == "collins" || GLASS == "highball" || GLASS == "old fashioned" || GLASS == "copper mug") {
+		moveAndRotate(LEFT_GLASS_X + 0.5*iceSize, BOTTOM_GLASS_Y - iceSize + iceSize*0.5, (Math.PI / 180)*25);
+		ctx.fillRect(LEFT_GLASS_X + 10, BOTTOM_GLASS_Y - iceSize - 25, iceSize, iceSize);
+		moveAndRotate(LEFT_GLASS_X + 0.5*iceSize, BOTTOM_GLASS_Y - iceSize + iceSize*0.5, -(Math.PI / 180)*25);
+		ctx.fillRect(RIGHT_GLASS_X - 103, BOTTOM_GLASS_Y - iceSize, iceSize, iceSize);
+	}
 	if (GLASS == "collins" || GLASS == "highball") {
 		moveAndRotate(LEFT_GLASS_X + 0.5*iceSize, BOTTOM_GLASS_Y - iceSize + iceSize*0.5, -(Math.PI / 180)*25);
 		ctx.fillRect(RIGHT_GLASS_X - 80, BOTTOM_GLASS_Y - 1.45*iceSize - 10, iceSize, iceSize);
 		moveAndRotate(LEFT_GLASS_X + 0.5*iceSize, BOTTOM_GLASS_Y - iceSize + iceSize*0.5, -(Math.PI / 180)*5);
 		ctx.fillRect(LEFT_GLASS_X + 110, BOTTOM_GLASS_Y - 2.5*iceSize + 5, iceSize, iceSize);
 		moveAndRotate(LEFT_GLASS_X + 0.5*iceSize, BOTTOM_GLASS_Y - iceSize + iceSize*0.5, (Math.PI / 180)*30);
+	}
+	if (GLASS == "margarita" || GLASS == "cocktail") {
+		moveAndRotate(LEFT_GLASS_X + 0.5*iceSize, BOTTOM_GLASS_Y - iceSizeSmall + iceSizeSmall*0.5, -(Math.PI / 180)*25);
+		ctx.fillRect(RIGHT_GLASS_X - 150, BOTTOM_GLASS_Y + 30 - 1.45*iceSizeSmall, iceSizeSmall, iceSizeSmall);
+		moveAndRotate(LEFT_GLASS_X + 0.5*iceSize, BOTTOM_GLASS_Y - iceSizeSmall + iceSizeSmall*0.5, (Math.PI / 180)*25);
 	}
 	ctx.globalAlpha = 1.0;
 	ctx.fillStyle = 'black';
@@ -256,7 +261,12 @@ function addLemon(lemIs0_limeIs1_orangeIs2) {
 	ctx.stroke();
 	ctx.fillStyle = 'black';
 	ctx.beginPath();
-	ctx.moveTo(LEFT_GLASS_X, TOP_GLASS_Y + 35);
+	if(GLASS == "collins" || GLASS == "highball" || GLASS == "old fashioned" || GLASS == "copper mug") {
+		ctx.moveTo(LEFT_GLASS_X, TOP_GLASS_Y + 35);
+	}
+	else {
+		ctx.moveTo(GLASS_WIDTH + (TOP_GLASS_Y+35+(13434/260))*(130/183), TOP_GLASS_Y+35);
+	}
 	ctx.lineWidth = GLASS_WIDTH;
 	ctx.lineTo(LEFT_GLASS_X, TOP_GLASS_Y);
 	ctx.stroke();
