@@ -14,7 +14,7 @@ var drinks = {"drinks": [
         "glass": "margarita",
         "garnishes": [
             "salt",
-            "slice of lime"
+            "lime slice"
         ],
         "served": "on the rocks",
         "timing": "any"
@@ -33,7 +33,7 @@ var drinks = {"drinks": [
         ],
         "glass": "copper mug",
         "garnishes": [
-            "slice of lime"
+            "lime slice"
         ],
         "served": "on the rocks",
         "timing": "any"
@@ -182,7 +182,7 @@ var drinks = {"drinks": [
         "timing": "before dinner"
     },
     {
-        "name": "Tom Collins",
+        "name": "John Collins",
         "ingredients": [
             { "name": "gin", "part": 3, "cl": 4.5 },
             { "name": "lemon juice", "part": 2, "cl": 3 },

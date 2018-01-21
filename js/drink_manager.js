@@ -18,10 +18,10 @@ function populateDrink(drink) {
     $("#prep-instructions-label").css("display","block");
     $("#links-label").css("display","block");
     reset();
+    drawGlass(drink.glass);
     populateIngredients(drink.ingredients);
     populatePrepInstructions(drink.prep);
     populateLinks(drink.links);
-    drawCollinsGlass();
     populateGarnishes(drink.garnishes);
     if(drink.served == "on the rocks")
         addIce();
@@ -51,11 +51,20 @@ function populateLinks(links) {
 
 function populateGarnishes(garnishes) {
     $.each(garnishes, function(key, garnish) {
-        if(garnish == "slice of lime")
-            addLemon(0);
-        else if(garnish == "lemon slice")
+        if(garnish == "lime slice")
             addLemon(1);
-        else if(garnish == "straw")
+        if(garnish == "lemon slice")
+            addLemon(0);
+        if(garnish == "orange slice")
+            addLemon(2);
+        if(garnish == "lemon spiral")
+            addLemon(0);
+        if(garnish == "straw")
             addStraw();
+        if(garnish == "maraschino cherry")
+            addCherry();
+        if(garnish == "cherry")
+            addCherry();
+        
     });
 }
