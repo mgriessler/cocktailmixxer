@@ -63,7 +63,7 @@ function drawGlass(nameOfGlass) {
 			drawCocktailGlass();
 			break;
 		case "highball":
-			GLASS = "old fashioned";
+			GLASS = "highball";
 			drawCollinsGlass();
 			break;
 		case "copper mug":
@@ -172,7 +172,7 @@ function drawParts(partsArr, colorArr, textArr) {
 }
 
 function getX(newH, rightIsT_leftIsF) {
-	if (GLASS == "collins" || GLASS == "old-fashioned") {
+	if (GLASS == "collins" || GLASS == "old fashioned") {
 		if (rightIsT_leftIsF) {
 			return(RIGHT_GLASS_X);
 		} else {
@@ -188,7 +188,7 @@ function getX(newH, rightIsT_leftIsF) {
 }
 
 function getY(partInd, partTot, currentPartTotal, eachPartWeight, adjustedFromBottom) {
-	if (GLASS == "collins" || GLASS == "old-fashioned") {
+	if (GLASS == "collins" || GLASS == "old fashioned") {
 		return (adjustedFromBottom - (currentPartTotal*eachPartWeight));
 	} else if (GLASS == "cocktail glass") {
 		return (Math.sqrt(partInd/(partTot/2)) * (BOTTOM_GLASS_Y - TOP_GLASS_Y - TOP_GAP))-BOTTOM_GLASS_Y;
