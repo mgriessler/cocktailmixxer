@@ -1,7 +1,7 @@
 .wrapper {
     display: grid;
     grid-template-columns: auto 10% 500px 20% auto; 
-    grid-gap: 1px;
+    grid-gap: 5px;
     grid-auto-rows: minmax(50px, auto);
 }
 .nav-bar {
@@ -9,12 +9,16 @@
     grid-column-end: 5;
     grid-row-start: 1;
     grid-row-end: 1;
+    background-color: #555555;
+    color: white;
+    text-align: center;
 }
 .left-side-bar {
     grid-column-start: 2;
     grid-column-end: 2;
     grid-row-start: 2;
     grid-row-end: 2;
+    border: 2px solid #555555;
 }
 .drink-container {
     grid-column-start: 3;
@@ -27,6 +31,7 @@
     grid-column-end: 4;
     grid-row-start: 2;
     grid-row-end: 2;
+    border: 2px solid #555555;
 }
 .bottom-bar {
     grid-column-start: 2;
@@ -39,7 +44,7 @@
 }
 
 #drink {
-    border: 1px solid black;
+    border: 2px solid #555555;
 }
 
 .button {
